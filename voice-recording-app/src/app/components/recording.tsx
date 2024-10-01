@@ -26,7 +26,7 @@ export default function Recording() {
         recognitionRef.current.onresult = (event: any) => {
             let finalTranscript = "";
             for (let i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) { // Only append final results
+                if (event.results[i].isFinal) { 
                     finalTranscript += event.results[i][0].transcript;
                 }
             }
@@ -67,7 +67,11 @@ export default function Recording() {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen w-full bg-gray-100">
+        <div className="flex flex-col items-center justify-start h-screen w-full bg-gray-100">
+            {/* Logo section */}
+            <div className="text-center mb-4 w-full">
+                <h1 className="text-2xl font-bold">-Pre test N.A</h1>
+            </div>
             {/* Transcript section */}
             <div className="w-full">
                 {(isRecording || transcript) && (
@@ -103,7 +107,7 @@ export default function Recording() {
                         value={language} 
                         onChange={(e) => setLanguage(e.target.value)} 
                         className="m-auto flex items-center justify-center bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded">
-                        <option value="en-US">English (US)</option>
+                        <option value="en-US">English</option>
                         <option value="sv-SE">Swedish</option>
                         {/* Add more languages as needed */}
                     </select>
