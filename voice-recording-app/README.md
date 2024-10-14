@@ -34,3 +34,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Application information
+
+This application is a real time transcription application that uses the webkitSpeechRecognition API to transcribe the user's voice. It is a simple application that allows the user to record their voice and save it to a file. The application is built with Next.js.
+
+## Disclaimer
+
+This application is a prototype and is not intended for production use. The application is a simple transcription application that allows the user to record their voice and save it to a file. The application is built with Next.js.
+
+You may use this application and build upon it. 
+
+## Usage
+
+To use the application, simply click the record button and start speaking. The application will transcribe the user's voice and save it to a file. The application will also display the transcript in real time.
+
+You may need to allow the browser to access your microphone. And allow the browser to use your microphone.
+
+## Languages 
+
+The application supports the following languages:
+
+- English
+- Swedish
+
+You can modify or add languages by changing the language in the recording component.
+
+## Supported browsers
+
+The application is supported on the following browsers:
+
+- Chrome
+- Edge
+- Safari (Not fully tested)
+
+Check the browser support for webkitSpeechRecognition [here](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+
+
