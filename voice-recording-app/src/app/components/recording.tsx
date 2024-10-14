@@ -1,29 +1,38 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 
+
 declare global {
     interface Window {
         webkitSpeechRecognition: any;
     }
 }
-
+//Recording component that is used to record the user's voice and save it to a file.
 export default function Recording() {
-
+    //States for the recording component.
     const [isRecording, setIsRecording] = useState<boolean>(false);
+    //State for the recording finished.
     const [recordingFinished, setRecordingFinished] = useState<boolean>(false);
+    //State for the transcript.
     const [transcript, setTranscript] = useState<string>("");
+    //State for the language.
     const [language, setLanguage] = useState<string>("en-US");
-
+    //Ref for the recognition object.
     const recognitionRef = useRef<any>(null);
+    //Function to start recording.
     const startRecording = () => {
         setIsRecording(true);
-
+        //Create a new recognition object.
         recognitionRef.current = new window.webkitSpeechRecognition();
+        //Set the continuous to true.
         recognitionRef.current.continuous = true;
+        //Set the interim results to false.
         recognitionRef.current.interimResults = false; 
+        //Set the language to the language state.
         recognitionRef.current.lang = language; 
-
+        //On result event.
         recognitionRef.current.onresult = (event: any) => {
+            //Set the final transcript to the transcript state.
             let finalTranscript = "";
             for (let i = event.resultIndex; i < event.results.length; i++) {
                 if (event.results[i].isFinal) { 
@@ -33,8 +42,10 @@ export default function Recording() {
             setTranscript(prevTranscript => prevTranscript + finalTranscript);
         }
 
+        //Start the recording.
         recognitionRef.current.start();
     }
+    //Effect to clean up the recognition object.
     useEffect(() => {
         return () => {
             if (recognitionRef.current) {
@@ -42,6 +53,7 @@ export default function Recording() {
             };
         }
     },[])
+    //Function to stop recording.
     const stopRecording = () => {
         if (recognitionRef.current) {
             recognitionRef.current.stop();
@@ -49,6 +61,7 @@ export default function Recording() {
         setIsRecording(false);
     }
 
+    //Function to toggle recording.
     const handleToggleRecording = () => {
         if (isRecording) {
             stopRecording();
@@ -57,6 +70,7 @@ export default function Recording() {
         }
     }
 
+    //Function to download the transcript.
     const downloadTranscript = () => {
         const element = document.createElement("a");
         const file = new Blob([transcript], { type: 'text/plain' });
@@ -66,11 +80,12 @@ export default function Recording() {
         element.click();
     }
 
+    //Return the recording component.
     return (
         <div className="flex flex-col items-center justify-start h-screen w-full bg-gray-100">
             {/* Logo section */}
             <div className="text-center mb-4 w-full">
-                <h1 className="text-2xl font-bold">-Pre test N.A</h1>
+                <h1 className="text-2xl font-bold">Real time transcription</h1>
             </div>
             {/* Transcript section */}
             <div className="w-full">
